@@ -221,7 +221,8 @@
       transition: border-color .25s, transform .25s;
     }
     .featured:hover { border-color: rgba(94,234,212,0.5); transform: translateY(-3px); }
-    .featured .shot { position: relative; min-height: 320px; background: var(--panel-2); overflow: hidden; }
+    .featured .shot { position: relative; min-height: 360px; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; padding-top: 36px;
+      background: radial-gradient(circle at 30% 20%, rgba(94,234,212,0.2), transparent 55%), radial-gradient(circle at 80% 90%, rgba(167,139,250,0.18), transparent 50%), var(--panel-2); }
     .featured .info { padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
     .featured .ribbon { display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--accent-dim); border: 1px solid rgba(94,234,212,0.35); color: var(--accent); font-size: 12px; font-family: 'JetBrains Mono', monospace; }
     .featured h3 { font-size: clamp(24px, 3vw, 32px); letter-spacing: -0.02em; line-height: 1.15; }
@@ -247,14 +248,27 @@
     }
     @keyframes cardIn { from { opacity: 0; transform: translateY(14px); } }
     .project-card-link:hover { border-color: rgba(94,234,212,0.5); transform: translateY(-4px); box-shadow: 0 24px 50px -24px rgba(94,234,212,0.35); }
-    .project-mock { aspect-ratio: 16 / 10; background: var(--panel-2); position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .project-mock { height: 250px; position: relative; overflow: hidden; border-bottom: 1px solid var(--line); display: flex; justify-content: center; align-items: flex-start; padding-top: 26px;
+      background: radial-gradient(circle at 25% 15%, rgba(94,234,212,0.16), transparent 55%), radial-gradient(circle at 85% 95%, rgba(167,139,250,0.14), transparent 50%), var(--panel-2); }
+    /* Phone mockup */
+    .phone { position: relative; width: 150px; height: 310px; flex-shrink: 0; border-radius: 28px; padding: 6px; background: #05070b;
+      border: 1px solid #2c3547; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.04);
+      transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+    .phone::before { content: ''; position: absolute; top: 11px; left: 50%; width: 46px; height: 13px; border-radius: 10px; background: #05070b; transform: translateX(-50%); z-index: 3; }
+    .phone .screen { position: relative; width: 100%; height: 100%; border-radius: 22px; overflow: hidden; background: var(--bg-2); }
+    .project-card-link:hover .phone { transform: translateY(-10px); }
+    .featured .phone { width: 210px; height: 440px; border-radius: 36px; padding: 8px; }
+    .featured .phone .screen { border-radius: 28px; }
+    .featured .phone::before { top: 15px; width: 64px; height: 17px; }
+    .featured:hover .phone { transform: translateY(-12px); }
     .shot-fallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; padding: 16px;
       background: radial-gradient(circle at 30% 20%, rgba(94,234,212,0.18), transparent 55%), radial-gradient(circle at 80% 90%, rgba(167,139,250,0.15), transparent 50%), var(--panel-2); }
-    .shot-fallback .initials { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 34px; letter-spacing: -0.02em; }
-    .shot-fallback .host { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-faint); }
-    .project-mock img, .featured .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity .4s, transform .6s; }
-    .project-mock img.loaded, .featured .shot img.loaded { opacity: 0.9; }
-    .project-card-link:hover .project-mock img.loaded, .featured:hover .shot img.loaded { opacity: 1; transform: scale(1.04); }
+    .shot-fallback .initials { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 30px; letter-spacing: -0.02em; }
+    .shot-fallback .host { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-faint); word-break: break-all; }
+    .shot-fallback.code { justify-content: flex-start; align-items: flex-start; text-align: left; padding: 30px 12px 12px; gap: 3px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; line-height: 1.6; color: var(--ink-dim); }
+    .shot-fallback.code .k { color: var(--accent-3); } .shot-fallback.code .f { color: var(--accent); } .shot-fallback.code .s { color: var(--warm); }
+    .phone .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity .5s; z-index: 2; }
+    .phone .screen img.loaded { opacity: 1; }
     .project-mock .chip { position: absolute; top: 12px; left: 12px; background: rgba(7,10,16,0.8); color: var(--accent); font-size: 11px; padding: 4px 10px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; backdrop-filter: blur(6px); border: 1px solid rgba(94,234,212,0.25); z-index: 1; }
     .project-mock .new { left: auto; right: 12px; color: #032520; background: var(--accent); border-color: var(--accent); font-weight: 600; }
     .project-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
@@ -373,7 +387,9 @@
       .terminal-wrap { max-width: 560px; }
       .skill-groups, .services-grid { grid-template-columns: repeat(2, 1fr); }
       .featured { grid-template-columns: 1fr; }
-      .featured .shot { min-height: 0; aspect-ratio: 16 / 9; }
+      .featured .shot { min-height: 0; height: 320px; }
+      .featured .phone { width: 180px; height: 380px; }
+      .featured .shot { padding-top: 28px; }
       .featured .info { padding: 28px; }
       .gh-panel { grid-template-columns: 1fr; gap: 28px; }
       .contact-card { grid-template-columns: 1fr; gap: 36px; padding: 32px; }
@@ -714,7 +730,11 @@
       url: 'https://qadirco.ng/',
       desc: 'Corporate website for Qadirco — a clean, fast, mobile-first experience that presents the company’s services clearly and turns visitors into enquiries.',
       tech: ['Responsive UI', 'SEO', 'Performance', 'Contact flow'],
-      isNew: true
+      isNew: true,
+      // qadirco.ng shows a security check to screenshot tools, so use your own phone screenshot:
+      // save it in the repo as images/qadirco.png (portrait, e.g. 390×844).
+      image: 'images/qadirco.png',
+      noAutoShot: true
     };
 
     const projects = [
@@ -745,15 +765,48 @@
     const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const hostOf = url => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return url; } };
     const initialsOf = name => name.replace(/[^A-Za-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
-    const shotUrl = url => `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`;
+    // Phone-size screenshots. WordPress mShots is free with no daily cap; microlink is the backup.
+    const mshotsUrl = url => `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=390&h=844&vpw=390&vph=844`;
+    const microlinkUrl = url => `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&viewport.width=390&viewport.height=844&viewport.isMobile=true&viewport.deviceScaleFactor=2`;
+    const shotSources = [];
+    function attachShot(img, sources) {
+      let i = 0, tries = 0;
+      const next = () => {
+        if (i >= sources.length) { img.remove(); return; }
+        const s = sources[i];
+        img.src = s.retry && tries ? `${s.url}&r=${tries}` : s.url;
+      };
+      img.onload = () => {
+        const s = sources[i];
+        // mShots first returns a wide "generating" placeholder; wait and retry until the real phone shot is ready.
+        if (s.retry && img.naturalHeight <= img.naturalWidth) {
+          if (tries < 8) { tries++; setTimeout(next, 3000); } else { i++; tries = 0; next(); }
+          return;
+        }
+        img.classList.add('loaded');
+      };
+      img.onerror = () => { i++; tries = 0; next(); };
+      next();
+    }
+    function hydrateShots(root) {
+      root.querySelectorAll('img[data-shot]').forEach(img => { attachShot(img, shotSources[img.dataset.shot]); img.removeAttribute('data-shot'); });
+    }
     const arrowSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
     const extSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg>';
     function shotMarkup(p) {
-      // App Store / GitHub pages screenshot poorly, so they use the designed fallback only.
-      const useShot = p.cat === 'web';
-      return `
-        <div class="shot-fallback"><div class="initials grad-text">${esc(initialsOf(p.name))}</div><div class="host">${esc(hostOf(p.url))}</div></div>
-        ${useShot ? `<img src="${shotUrl(p.url)}" alt="${esc(p.name)} website preview" loading="lazy" decoding="async" onload="this.classList.add('loaded')" onerror="this.remove()">` : ''}`;
+      // Order: your own screenshot (p.image) → automatic phone screenshot → designed fallback.
+      const sources = [];
+      if (p.image) sources.push({ url: p.image });
+      if (!p.noAutoShot && p.cat !== 'backend') sources.push({ url: mshotsUrl(p.url), retry: true }, { url: microlinkUrl(p.url) });
+      const fallback = p.cat === 'backend'
+        ? `<div class="shot-fallback code"><div><span class="k">@RestController</span></div><div><span class="k">class</span> <span class="f">${esc(p.name.split(' ')[0])}Api</span> {</div><div>&nbsp;<span class="k">@PostMapping</span>(<span class="s">"/v1"</span>)</div><div>&nbsp;<span class="f">handle</span>(req) {</div><div>&nbsp;&nbsp;<span class="k">return</span> ok();</div><div>&nbsp;}</div><div>}</div></div>`
+        : `<div class="shot-fallback"><div class="initials grad-text">${esc(initialsOf(p.name))}</div><div class="host">${esc(hostOf(p.url))}</div></div>`;
+      let img = '';
+      if (sources.length) {
+        shotSources.push(sources);
+        img = `<img data-shot="${shotSources.length - 1}" alt="${esc(p.name)} on mobile" loading="lazy" decoding="async">`;
+      }
+      return `<div class="phone"><div class="screen">${fallback}${img}</div></div>`;
     }
 
     /* ---------- Featured ---------- */
@@ -768,6 +821,7 @@
         <div class="project-tech">${featuredProject.tech.map(t => `<span>${esc(t)}</span>`).join('')}</div>
         <span class="visit">Visit ${esc(hostOf(featuredProject.url))} ${extSvg}</span>
       </div>`;
+    hydrateShots(featuredEl);
 
     /* ---------- Project grid ---------- */
     const grid = document.getElementById('projectGrid');
@@ -822,6 +876,7 @@
           </div>`;
         grid.appendChild(a);
       });
+      hydrateShots(grid);
       const hidden = list.length - limit;
       moreRow.hidden = hidden <= 0 && !expanded;
       moreBtn.textContent = expanded ? 'Show fewer' : `Show ${hidden} more project${hidden === 1 ? '' : 's'}`;
